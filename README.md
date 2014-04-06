@@ -28,7 +28,7 @@ When I run ```make debug``` my project expands to this:
 |  |-- main_debug.o
 |  |-- functions_debug.o
 |--bin
-|  |-- example
+|  |-- example_debug
 ```
 
 Where bin/example_debug is my binary and my object files can be found in obj.
