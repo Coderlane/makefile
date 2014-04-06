@@ -30,11 +30,13 @@ RELEASE_OBJECTS=$(patsubst $(SRC_DIR)/%$(SRC_EXTENSION),$(OBJ_DIR)/%$(RELEASE_OB
 DEBUG_OBJECTS=$(patsubst $(SRC_DIR)/%$(SRC_EXTENSION),$(OBJ_DIR)/%$(DEBUG_OBJ_EXTENSION),$(SOURCES))
 
 # This is the name of your binary.
-BIN=PROJECT_NAME
+RELEASE_BIN=example
+DEBUG_BIN=example_debug
 
 # Where the binary is being put
 BIN_DIR=bin
-TARGET=$(BIN_DIR)/$(BIN)
+RELEASE_TARGET=$(BIN_DIR)/$(RELEASE_BIN)
+DEBUG_TARGET=$(BIN_DIR)/$(DEBUG_BIN)
 
 # Flags for debug vs release
 DEBUG_FLAGS=-O0 -g -DDEBUG
@@ -53,7 +55,7 @@ dir:
 # Clean objects
 .PHONY: clean
 clean:
-	rm -f $(TARGET)
+	rm -f $(DEBUG_TARGET) $(RELEASE_TARGET)
 	rm -f $(DEBUG_OBJECTS)
 	rm -f $(RELEASE_OBJECTS)
  
@@ -61,13 +63,13 @@ clean:
 .PHONY: debug
 debug: CFLAGS += $(DEBUG_FLAGS)
 debug: $(DEBUG_OBJECTS)
-	$(CC) -o $(TARGET) $^ $(LIBS)
+	$(CC) -o $(DEBUG_TARGET) $^ $(LIBS)
  
 # Build Release
 .PHONY: release
 release: CFLAGS += $(RELEASE_FLAGS)
 release: $(RELEASE_OBJECTS)
-	$(CC) -o $(TARGET) $^ $(LIBS)
+	$(CC) -o $(RELEASE_TARGET) $^ $(LIBS)
  
 # Build Object Files
 # Debug
